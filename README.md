@@ -7,7 +7,7 @@
  By [Wenlong Zhang](https://wenlongzhang0517.github.io/), [Guangyuan Shi](https://scholar.google.com/citations?user=fL_osukAAAAJ&hl=en), [Yihao Liu](http://xpixel.group/2010/03/29/yihaoliu.html), [Chao Dong](https://scholar.google.com.hk/citations?user=OSDCB0UAAAAJ&hl=en), [Xiao-Ming Wu](http://www4.comp.polyu.edu.hk/~csxmwu/)
  
 ## Codes and models will be released soon.
-The code is based on [BasicSR](https://github.com/XPixelGroup/BasicSR) and [Real-ESRGAN](https://github.com/xinntao/Real-ESRGAN)
+The code is based on [BasicSR](https://github.com/XPixelGroup/BasicSR) and [Real-ESRGAN](https://github.com/xinntao/Real-ESRGAN). Thanks to [Xintao Wang](https://xinntao.github.io/).
 ## An example of the gate operation on adding blur
 
 ```python
