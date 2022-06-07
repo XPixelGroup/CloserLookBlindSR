@@ -1,5 +1,6 @@
 # CloserLookBlindSR
-### [Paper](https://arxiv.org/pdf/2205.04910.pdf) accepted by CVPR Workshop, NTIRE 2022
+### Paper accepted by CVPR Workshop, NTIRE 2022
+[Paper](https://arxiv.org/pdf/2205.04910.pdf) | [Supplementary file](https://openaccess.thecvf.com/content/CVPR2022W/NTIRE/supplemental/Zhang_A_Closer_Look_CVPRW_2022_supplemental.pdf)
 
 ### A Closer Look at Blind Super-Resolution: Degradation Models, Baselines, and Performance Upper Bounds
 
