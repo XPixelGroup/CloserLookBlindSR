@@ -9,7 +9,7 @@
  
 
 <p align="center">
-  <img height="330" src="./figure/method.png">
+  <img height="270" src="./figure/method.png">
 </p>
 
  
