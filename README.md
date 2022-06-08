@@ -9,7 +9,7 @@
  
 
 <p align="center">
-  <img height="330" src="./figures/method.pdf">
+  <img height="330" src="./figure/method.png">
 </p>
 
  
