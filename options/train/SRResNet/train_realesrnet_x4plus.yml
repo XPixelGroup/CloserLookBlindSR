@@ -1,0 +1,208 @@
+# general settings
+name: train_GDRealESRNetx4plus_1000k_B12G4
+model_type: GDRealESRNetModel
+scale: 4
+num_gpu: auto  # auto: can infer from your visible devices automatically. official: 4 GPUs
+manual_seed: 0
+
+# ----------------- options for synthesizing training data in RealESRNetModel ----------------- #
+gt_usm: false  # USM the ground-truth
+
+# the first gate prob
+gate_first_blur_prob: 0.5
+gate_first_resize_prob: 0.5
+gate_first_noise_prob: 0.5
+gate_first_jpeg_prob: 0.5
+
+# the second gate prob
+gate_second_blur_prob: 0.5
+gate_second_noise_prob: 0.5
+gate_second_resize_prob: 0.5
+
+gate_fianl_filter_prob: 0.5
+
+# the first degradation process
+resize_prob: [0.2, 0.7, 0.1]  # up, down, keep
+resize_range: [0.15, 1.5]
+gaussian_noise_prob: 0.5
+noise_range: [1, 30]
+poisson_scale_range: [0.05, 3]
+gray_noise_prob: 0.4
+jpeg_range: [30, 95]
+
+# the second degradation process
+# second_blur_prob: 0.8
+resize_prob2: [0.3, 0.4, 0.3]  # up, down, keep
+resize_range2: [0.3, 1.2]
+gaussian_noise_prob2: 0.5
+noise_range2: [1, 25]
+poisson_scale_range2: [0.05, 2.5]
+gray_noise_prob2: 0.4
+jpeg_range2: [30, 95]
+
+gt_size: 256
+queue_size: 160
+
+# dataset and data loader settings
+datasets:
+  train:
+    name: DF2K
+    type: GateDegradationDataset
+    dataroot_gt: /data3/wenlong/datasets/div2k/train_hr_sub
+    meta_info: /data3/wenlong/datasets/div2k/meta_info_DF2Ksub.txt
+    
+    io_backend:
+      type: disk
+
+    blur_kernel_size: 21
+    kernel_list: ['iso', 'aniso', 'generalized_iso', 'generalized_aniso', 'plateau_iso', 'plateau_aniso']
+    kernel_prob: [0.45, 0.25, 0.12, 0.03, 0.12, 0.03]
+    sinc_prob: 0.1
+    blur_sigma: [0.2, 3]
+    betag_range: [0.5, 4]
+    betap_range: [1, 2]
+
+    blur_kernel_size2: 21
+    kernel_list2: ['iso', 'aniso', 'generalized_iso', 'generalized_aniso', 'plateau_iso', 'plateau_aniso']
+    kernel_prob2: [0.45, 0.25, 0.12, 0.03, 0.12, 0.03]
+    sinc_prob2: 0.1
+    blur_sigma2: [0.2, 1.5]
+    betag_range2: [0.5, 4]
+    betap_range2: [1, 2]
+
+    final_sinc_prob: 0.8
+
+    gt_size: 256
+    use_hflip: True
+    use_rot: False
+
+    # data loader
+    use_shuffle: true
+    num_worker_per_gpu: 5
+    batch_size_per_gpu: 8
+    dataset_enlarge_ratio: 1
+    prefetch_mode: ~
+
+  # Uncomment these for validation
+
+  val_1:
+    name: set14_t1_bic
+    type: PairedImageDataset
+    dataroot_gt: /data3/wenlong/datasets/validation/set14/GTmod12
+    dataroot_lq: /data3/wenlong/datasets/validation/set14/LRbicx4_t1_bic
+    io_backend:
+      type: disk
+  val_2:
+    name: set14_t2_b20
+    type: PairedImageDataset
+    dataroot_gt: /data3/wenlong/datasets/validation/set14/GTmod12
+    dataroot_lq: /data3/wenlong/datasets/validation/set14/LRbicx4_t2_b20
+    io_backend:
+      type: disk
+  val_3:
+    name: set14_t3_n20
+    type: PairedImageDataset
+    dataroot_gt: /data3/wenlong/datasets/validation/set14/GTmod12
+    dataroot_lq: /data3/wenlong/datasets/validation/set14/LRbicx4_t3_n20
+    io_backend:
+      type: disk
+  val_4:
+    name: set14_t4_j60
+    type: PairedImageDataset
+    dataroot_gt: /data3/wenlong/datasets/validation/set14/GTmod12
+    dataroot_lq: /data3/wenlong/datasets/validation/set14/LRbicx4_t4_j60
+    io_backend:
+      type: disk
+  val_5:
+    name: set14_t5_b20n20
+    type: PairedImageDataset
+    dataroot_gt: /data3/wenlong/datasets/validation/set14/GTmod12
+    dataroot_lq: /data3/wenlong/datasets/validation/set14/LRbicx4_t5_b20n20
+    io_backend:
+      type: disk
+  val_6:
+    name: set14_t6_b20j60
+    type: PairedImageDataset
+    dataroot_gt: /data3/wenlong/datasets/validation/set14/GTmod12
+    dataroot_lq: /data3/wenlong/datasets/validation/set14/LRbicx4_t6_b20j60
+    io_backend:
+      type: disk
+  val_7:
+    name: set14_t7_n20j60
+    type: PairedImageDataset
+    dataroot_gt: /data3/wenlong/datasets/validation/set14/GTmod12
+    dataroot_lq: /data3/wenlong/datasets/validation/set14/LRbicx4_t7_n20j60
+    io_backend:
+      type: disk
+  val_8:
+    name: set14_t8_b20n20j60
+    type: PairedImageDataset
+    dataroot_gt: /data3/wenlong/datasets/validation/set14/GTmod12
+    dataroot_lq: /data3/wenlong/datasets/validation/set14/LRbicx4_t8_b20n20j60
+    io_backend:
+      type: disk    
+
+# network structures
+network_g:
+  type: RRDBNet
+  num_in_ch: 3
+  num_out_ch: 3
+  num_feat: 64
+  num_block: 23
+  num_grow_ch: 32
+
+# path
+path:
+  pretrain_network_g: #experiments/pretrained_models/ESRGAN_SRx4_DF2KOST_official-ff704c30.pth
+  param_key_g: params_ema
+  strict_load_g: true
+  resume_state: ~
+
+# training settings
+train:
+  ema_decay: 0.999
+  optim_g:
+    type: Adam
+    lr: !!float 2e-4
+    weight_decay: 0
+    betas: [0.9, 0.99]
+
+  scheduler:
+    type: MultiStepLR
+    milestones: [500000, 1000000, 1500000,2000000]
+    gamma: 0.5
+
+  total_iter: 2000000
+  warmup_iter: -1  # no warm up
+
+  # losses
+  pixel_opt:
+    type: L1Loss
+    loss_weight: 1.0
+    reduction: mean
+
+# Uncomment these for validation
+# validation settings
+val:
+  val_freq: !!float 1e4
+  save_img: false
+
+  metrics:
+    psnr: # metric name
+      type: calculate_psnr
+      crop_border: 4
+      test_y_channel: true
+
+# logging settings
+logger:
+  print_freq: 200
+  save_checkpoint_freq: !!float 1e4
+  use_tb_logger: true
+  wandb:
+    project: Project-2022-closerlook
+    resume_id: ~
+
+# dist training settings
+dist_params:
+  backend: nccl
+  port: 29500
