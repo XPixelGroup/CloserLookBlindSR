@@ -13,8 +13,6 @@
 </p>
 
  
-## Codes and models will be released soon.
-The code is based on [BasicSR](https://github.com/XPixelGroup/BasicSR) and [Real-ESRGAN](https://github.com/xinntao/Real-ESRGAN). Thanks to [Xintao Wang](https://xinntao.github.io/).
 ## An example of the gate operation on adding blur
 
 ```python
@@ -28,4 +26,29 @@ The code is based on [BasicSR](https://github.com/XPixelGroup/BasicSR) and [Real
      out = self.gt
 ```
 
+## Citation
 
+Please cite us if our work is useful for your research.
+
+```
+@InProceedings{Zhang_2022_CVPR,
+    author    = {Zhang, Wenlong and Shi, Guangyuan and Liu, Yihao and Dong, Chao and Wu, Xiao-Ming},
+    title     = {A Closer Look at Blind Super-Resolution: Degradation Models, Baselines, and Performance Upper Bounds},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
+    month     = {June},
+    year      = {2022},
+    pages     = {527-536}
+}
+```
+
+## License
+
+This project is released under the [Apache 2.0 license](LICENSE).
+
+## Acknowledgement
+
+The code is based on [BasicSR](https://github.com/XPixelGroup/BasicSR) and [Real-ESRGAN](https://github.com/xinntao/Real-ESRGAN). Thanks to [Xintao Wang](https://xinntao.github.io/).
+
+## Contact
+
+If you have any questions, please feel free to contact with me at zhangwenlong0517@gmail.com
